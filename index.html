@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UAS PWD NO 3</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .wrapper {
+            display: flex;
+            border: 2px solid #000;
+            width: 800px;
+            margin: 20px auto;
+        }
+
+        .container {
+            width: 50%;
+            padding: 20px;
+            border-right: 2px solid #000;
+        }
+
+        .output {
+            width: 50%;
+            padding: 20px;
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        input {
+            width: 90%;
+            padding: 5px;
+            margin-bottom: 10px;
+        }
+
+        button {
+            padding: 6px 15px;
+            cursor: pointer;
+        }
+
+        .hasil p {
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<div class="wrapper">
+    <div class="container">
+        <h2>Hitung Gaji Karyawan</h2>
+
+        Gaji Pokok (Rp): <br>
+        <input type="number" id="gaji" placeholder="Masukkan Gaji Pokok"><br>
+
+        Jumlah Jam Lembur: <br>
+        <input type="number" id="lembur" placeholder="Masukkan Jam Lembur"><br>
+
+        <button onclick="hitgaji()">Hitung Gaji</button>
+    </div>
+
+    <div class="output">
+        <h2>OUTPUT</h2>
+        <div class="hasil" id="hasil"></div>
+    </div>
+</div>
+
+<script>
+function hitgaji() {
+    var gajiPokok = parseInt(document.getElementById("gaji").value);
+    var jamLembur = parseInt(document.getElementById("lembur").value);
+
+    var tarifLembur = 20000;
+    var totalLembur = jamLembur * tarifLembur;
+    var gajiKotor = gajiPokok + totalLembur;
+
+    var pajak;
+    if (gajiKotor < 5000000) {
+        pajak = 0.05 * gajiKotor;
+    } else if (gajiKotor <= 10000000) {
+        pajak = 0.10 * gajiKotor;
+    } else {
+        pajak = 0.15 * gajiKotor;
+    }
+
+    var gajiBersih = gajiKotor - pajak;
+
+    document.getElementById("hasil").innerHTML =
+        "<p>Gaji Pokok: Rp " + gajiPokok.toLocaleString() + "</p>" +
+        "<p>Total Gaji Lembur: Rp " + totalLembur.toLocaleString() + "</p>" +
+        "<p>Gaji Kotor: Rp " + gajiKotor.toLocaleString() + "</p>" +
+        "<p>Pajak: Rp " + pajak.toLocaleString() + "</p>" +
+        "<p>Gaji Bersih: Rp " + gajiBersih.toLocaleString() + "</p>";
+}
+</script>
+</body>
+</html>
